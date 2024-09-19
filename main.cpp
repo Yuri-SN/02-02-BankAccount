@@ -6,11 +6,8 @@ struct BankAccount {
     double balance;
 };
 
-BankAccount changeBalance(BankAccount bankAccount, double newBalance) {
-    BankAccount updatedAccount =
-        BankAccount{bankAccount.accNum, bankAccount.ownerName, newBalance};
-
-    return updatedAccount;
+void changeBalance(BankAccount *account, const double *newBalance) {
+    account->balance = *newBalance;
 }
 
 int main() {
@@ -30,9 +27,8 @@ int main() {
     std::cout << "Введите новый баланс: ";
     std::cin >> newBalance;
 
-    BankAccount updatedAccount = changeBalance(account, newBalance);
+    changeBalance(&account, &newBalance);
 
-    std::cout << "Ваш счёт: " << updatedAccount.ownerName << ", "
-              << updatedAccount.accNum << ", " << updatedAccount.balance
-              << std::endl;
+    std::cout << "Ваш счёт: " << account.ownerName << ", " << account.accNum
+              << ", " << account.balance << std::endl;
 }
